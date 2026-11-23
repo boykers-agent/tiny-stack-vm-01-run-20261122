@@ -104,12 +104,16 @@ function run(p, inp) {
         else if (b === 0x11) r = (x - y) | 0;
         else if (b === 0x12) r = Math.imul(x, y);
         else if (b === 0x13) {
+          // Signed division truncates toward zero; the one overflow case
+          // (-2147483648 / -1) wraps back to -2147483648 instead of 2^31.
           if (y === 0) return end(4);
           r = x === -2147483648 && y === -1 ? x : (x / y) | 0;
         } else if (b === 0x14) {
+          // Signed remainder takes the sign of x; x % -1 is always 0.
           if (y === 0) return end(4);
           r = y === -1 ? 0 : (x % y) | 0;
         } else if (b === 0x15) {
+          // Unsigned division: read both operands as unsigned first.
           if (y === 0) return end(4);
           r = Math.floor((x >>> 0) / (y >>> 0)) | 0;
         } else if (b === 0x16) {
