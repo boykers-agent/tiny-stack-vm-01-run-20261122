@@ -1,6 +1,6 @@
 import{readdirSync as r,readFileSync as f,mkdirSync as m,writeFileSync as w}from"fs"
 const T=` 1a$&*+/pppppppp)))))))%)))%)))p)))ppppppppppppp@DD@ ppppppppppp%(pppppppppppppp$$!$`,F=[(a,b)=>a+b|0,(a,b)=>a-b|0,Math.imul,(a,b)=>a/b|0,(a,b)=>a%b|0,(a,b)=>(a>>>0)/(b>>>0)|0,(a,b)=>(a>>>0)%(b>>>0)|0,,(a,b)=>a&b,(a,b)=>a|b,(a,b)=>a^b,,(a,b)=>a<<(b&31),(a,b)=>a>>(b&31),(a,b)=>a>>>(b&31)|0,,(a,b)=>a==b?1:0,(a,b)=>a<b?1:0,(a,b)=>a>>>0<b>>>0?1:0]
-function R(P,Q){let D=new Int32Array(256),C=new Int32Array(64),M=new Int32Array(256),O=new Uint8Array(65536),o=0,p=0,d=0,c=0,s=0,j=0,n=P.length,E=e=>({o:O.slice(0,o),c:e})
+function R(P,Q){let D=new Int32Array(256),C=D.slice(),M=D.slice(),O=new Uint8Array(65536),o=0,p=0,d=0,c=0,s=0,j=0,n=P.length,E=e=>({o:O.slice(0,o),c:e})
 for(;;){if(s==1e6)return E(10)
 if(p<0||p>=n)return E(9)
 let b=P[p],v=T.charCodeAt(b)-32
@@ -18,7 +18,7 @@ else if(b==4)D[d]=D[d-1],d++
 else if(b==5){let t=D[d-1];D[d-1]=D[d-2];D[d-2]=t}else if(b==6)D[d]=D[d-2],d++
 else{let a=D[d-3];D[d-3]=D[d-2];D[d-2]=D[d-1];D[d-1]=a}}else if(b<35){if(b==23)D[d-1]=-D[d-1]|0
 else if(b==27)D[d-1]=~D[d-1]
-else{let y=D[d-1];if(b>18&&b<23&&!y)return E(4);D[d-2]=F[b-16](D[d-2],y);d--}}else if(b<53){let g=((P[x-2]|P[x-1]<<8)<<16)>>16
+else{let y=D[d-1];if(b>18&&b<23&&!y)return E(4);D[d-2]=F[b-16](D[d-2],y);d--}}else if(b<53){let g=(P[x-2]|P[x-1]<<8)<<16>>16
 if(b<49)p=x+g
 else if(b<51){let y=D[--d];if((b==49)==!y)p=x+g}else if(b==51){if(c==64)return E(7);C[c++]=x;p=P[x-2]|P[x-1]<<8}else{if(!c)return E(8);p=C[--c]}}else if(b<66){let a=D[d-1]
 if(a<0||a>255)return E(6)
